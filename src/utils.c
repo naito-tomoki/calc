@@ -10,6 +10,26 @@ strlen_s(const char *s)
 	return (s - cp);
 }
 
+char *
+strcpy_s(char *dst, const char *src)
+{
+	if (!dst) return NULL;
+	if (!src) return dst;
+	char *cp = dst;
+	while (*src) *dst++ = *src++;
+	*dst = 0;
+	return cp;
+}
+
+char *
+strcat_s(char *dst, const char *src)
+{
+	if (!dst) return NULL;
+	char *cp = dst;
+	strcpy_s(dst + strlen_s(dst), src);
+	return cp;
+}
+
 size_t
 len_strs(int elems, char **strs)
 {
@@ -21,11 +41,14 @@ len_strs(int elems, char **strs)
 	return sum;
 }
 
-//char *
-//conn_strs(int elems, char **strs)
-//{
-//	if (elems < 1) return NULL;
-//	if (!strs) return NULL;
-//	char *res = malloc();
-//	return res;
-//}
+char *
+conn_strs(int elems, char **strs)
+{
+	if (elems < 1) return NULL;
+	if (!strs) return NULL;
+	char *res = malloc(len_strs(elems, strs) + sizeof(char));
+	if (!res) return NULL;
+	*res = 0;
+	while (elems--) strcat_s(res, *strs++);
+	return res;
+}
