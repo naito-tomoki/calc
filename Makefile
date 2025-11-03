@@ -9,7 +9,7 @@ override DIR_SRC	=	src
 
 SRCS				=	$(wildcard $(DIR_SRC)/*.c)
 OBJS				=	$(SRCS:$(DIR_SRC)/%.c=$(DIR_OBJ)/%.o)
-INCS				=	$(foreach d, $(wildcard $(DIR_INC)/*.h), -I $(d))
+INCS				=	$(foreach d, $(sort $(dir $(wildcard $(DIR_INC)/*.h))), -I $(d))
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(INCS) $^ -o $@
