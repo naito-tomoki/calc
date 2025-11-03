@@ -42,13 +42,18 @@ len_strs(int elems, char **strs)
 }
 
 char *
-conn_strs(int elems, char **strs)
+conn_strs(int elems, char **strs, const char *pad)
 {
 	if (elems < 1) return NULL;
 	if (!strs) return NULL;
-	char *res = malloc(len_strs(elems, strs) + sizeof(char));
+	char *res = malloc(len_strs(elems, strs) + sizeof(char)
+			+ strlen_s(pad) * (elems - 1));
 	if (!res) return NULL;
 	*res = 0;
-	while (elems--) strcat_s(res, *strs++);
+	while (elems--)
+	{
+		strcat_s(res, *strs++);
+		if (elems) strcat_s(res, pad);
+	}
 	return res;
 }

@@ -16,6 +16,6 @@ size_t
 len_strs(int elems, char **strs);
 
 char *
-conn_strs(int elems, char **strs);
+conn_strs(int elems, char **strs, const char *pad);
 
 #endif
