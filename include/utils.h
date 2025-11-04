@@ -12,6 +12,9 @@ strcpy_s(char *dst, const char *src);
 char *
 strcat_s(char *dst, const char *src);
 
+int
+strncmp_s(const char *s1, const char *s2, size_t n);
+
 size_t
 len_strs(int elems, char **strs);
 

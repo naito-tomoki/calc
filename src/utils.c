@@ -30,6 +30,21 @@ strcat_s(char *dst, const char *src)
 	return cp;
 }
 
+int
+strncmp_s(const char *s1, const char *s2, size_t n)
+{
+	if (!s1) return 0;
+	if (!s2) return 0;
+	const unsigned char *u_s1 = (unsigned char *)s1;
+	const unsigned char *u_s2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*u_s1 != *u_s2) return (*u_s1 - *u_s2);
+		u_s1++; u_s2++;
+	}
+	return 0;
+}
+
 size_t
 len_strs(int elems, char **strs)
 {
