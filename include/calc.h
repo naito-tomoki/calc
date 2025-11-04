@@ -12,6 +12,7 @@ typedef struct s_lexer
 {
 	t_token_type	type;
 	char		*value;
+	struct s_lexer	*next;
 }	t_lexer;
 
 #endif

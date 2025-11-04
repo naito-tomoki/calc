@@ -3,6 +3,9 @@
 
 # include <aio.h>
 
+int
+isspace_s(int c);
+
 size_t
 strlen_s(const char *s);
 
@@ -17,6 +20,9 @@ strcat_s(char *dst, const char *src);
 
 int
 strncmp_s(const char *s1, const char *s2, size_t n);
+
+char *
+strdup_s(const char *s);
 
 char *
 strndup_s(const char *s, size_t n);

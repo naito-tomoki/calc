@@ -12,4 +12,7 @@ typedef struct s_token_info
 int
 lexer(const char *calc_form, t_lexer **lexer);
 
+void
+lexer_free(t_lexer **lexer);
+
 #endif

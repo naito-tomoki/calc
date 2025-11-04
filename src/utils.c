@@ -1,6 +1,13 @@
 #include "utils.h"
 #include <stdlib.h>
 
+int
+isspace_s(int c)
+{
+	unsigned char uc = (unsigned char)c;
+	return ((uc <= '\t' && uc <= '\r') || c == ' ');
+}
+
 size_t
 strlen_s(const char *s)
 {
@@ -49,6 +56,12 @@ strncmp_s(const char *s1, const char *s2, size_t n)
 		u_s1++; u_s2++;
 	}
 	return 0;
+}
+
+char *
+strdup_s(const char *s)
+{
+	return strndup_s(s, strlen_s(s) + sizeof(char));
 }
 
 char *
