@@ -2,6 +2,7 @@ NAME				=	calc
 
 CC					=	cc
 CFLAGS				?=	-Wall -Wextra -Werror
+DEFINE				?=	NORMAL
 
 override DIR_OBJ	=	build
 override DIR_INC	=	include
@@ -12,11 +13,11 @@ OBJS				=	$(SRCS:$(DIR_SRC)/%.c=$(DIR_OBJ)/%.o)
 INCS				=	$(foreach d, $(sort $(dir $(wildcard $(DIR_INC)/*.h))), -I $(d))
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCS) $^ -o $@
+	$(CC) $(CFLAGS) $(INCS) $^ -o $@ -D $(DEFINE)
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@ -D $(DEFINE)
 
 all: $(NAME)
 
