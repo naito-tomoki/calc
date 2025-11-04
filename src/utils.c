@@ -13,10 +13,16 @@ strlen_s(const char *s)
 char *
 strcpy_s(char *dst, const char *src)
 {
+	return strncpy_s(dst, src, strlen_s(src) + sizeof(char));
+}
+
+char *
+strncpy_s(char *dst, const char *src, size_t n)
+{
 	if (!dst) return NULL;
 	if (!src) return dst;
 	char *cp = dst;
-	while (*src) *dst++ = *src++;
+	while (--n) *dst++ = *src++;
 	*dst = 0;
 	return cp;
 }
@@ -43,6 +49,16 @@ strncmp_s(const char *s1, const char *s2, size_t n)
 		u_s1++; u_s2++;
 	}
 	return 0;
+}
+
+char *
+strndup_s(const char *s, size_t n)
+{
+	if (!s) return NULL;
+	char *r = malloc(n + sizeof(char));
+	if (!r) return NULL;
+	*r = 0;
+	return strncpy_s(r, s, n);
 }
 
 size_t
