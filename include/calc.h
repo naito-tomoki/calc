@@ -11,14 +11,14 @@ typedef enum
 typedef struct s_lexer
 {
 	t_token_type	type;
-	char		*value;
+	char			*value;
 	struct s_lexer	*next;
 }	t_lexer;
 
 typedef struct s_parser
 {
 	t_token_type	type;
-	char		*value;
+	int				value;
 	struct s_parser	*left;
 	struct s_parser *right;
 }	t_parser;

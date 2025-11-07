@@ -79,8 +79,8 @@ lexer_set(const char calc_form[static 1], t_lexer *lexer[static 1])
 {
 	const t_token_type def_type = TOKEN_NUM;
 	const t_token_info info[] = {
-		{token: "+", type: TOKEN_PLUS},
-		{token: "-", type: TOKEN_MINUS},
+		{.token = "+", .type = TOKEN_PLUS},
+		{.token = "-", .type = TOKEN_MINUS},
 	};
 	const int inf = (sizeof(info) / sizeof(info[0]));
 	while (*calc_form)
