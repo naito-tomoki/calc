@@ -25,7 +25,7 @@ print_ast_deep(t_parser *ast, int deep)
 	if (!ast) return ;
 	for (int i = 0; i < deep; i++) printf(" ");
 	printf("type: %d", ast->type);
-	if (ast->type == TOKEN_NUM) printf(" value: %d\n", ast->value);
+	if (ast->type == TOKEN_NUM) printf(" value: %d", ast->value);
 	printf("\n");
 	print_ast_deep(ast->left, deep + 1);
 	print_ast_deep(ast->right, deep + 1);
