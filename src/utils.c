@@ -74,6 +74,25 @@ strndup_s(const char *s, size_t n)
 	return strncpy_s(r, s, n);
 }
 
+int
+atoi_s(const char *nptr)
+{
+	if (!nptr) return 0;
+	unsigned int res = 0; int sign = 1;
+	while (isspace_s(*nptr)) nptr++;
+	if ((*nptr) == '+' || (*nptr) == '-')
+	{
+		if ((*nptr) == '-') sign = -1;
+		nptr++;
+	}
+	while (*nptr)
+	{
+		res = (res * 10) + ((*nptr) - '0');
+		nptr++;
+	}
+	return (res * sign);
+}
+
 size_t
 len_strs(int elems, char **strs)
 {

@@ -27,6 +27,9 @@ strdup_s(const char *s);
 char *
 strndup_s(const char *s, size_t n);
 
+int
+atoi_s(const char *nptr);
+
 size_t
 len_strs(int elems, char **strs);
 
