@@ -65,7 +65,7 @@ lexer_add_elem(const char f[static 1], t_lexer *lexer[static 1], t_token_type de
 	t_lexer *r = malloc(sizeof(t_lexer));
 	if (!r) return false;
 	if (!(r->value = lexer_dup_token(f, inf, info, hit))) return (free(r), false);
-	r->type = (hit != -1 ? info[hit].type: def_type);
+	r->type = (hit != -1 ? info[hit].type : def_type);
 	r->next = NULL;
 	if (*lexer)
 		lexer_last_elem(*lexer)->next = r;

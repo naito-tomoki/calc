@@ -30,27 +30,38 @@ parse_factor(t_lexer *token, t_parser **ast)
 static int
 parse_expr(t_lexer *token, t_parser **ast)
 {
-	t_lexer *prev = NULL;
-	while (token && token->type == TOKEN_NUM)
+	if (!token) return false;
+	t_parser *left = NULL;
+	if (!parse_factor(token, &left))
+		return false;
+
+	token = token->next;
+	if (!token)
 	{
-		prev = token; token = token->next;
-	}
-	if (!token) return true;
-	t_parser *expr = malloc(sizeof(t_parser));
-	if (!expr) return false;
-	expr->value = 0;
-	expr->type = token->type;
-	if (!parse_factor(prev, &expr->left))
-	{
-		free(expr);
+		*ast = left;
 		return true;
 	}
-	if (!parse_expr(token->next, &expr->right))
+	if (token->type != TOKEN_PLUS && token->type != TOKEN_MINUS)
 	{
-		free(expr);
+		*ast = left;
 		return true;
 	}
-	*ast = expr;
+
+	t_parser *node = malloc(sizeof(t_parser));
+	if (!node)
+	{
+		free(left);
+		return false;
+	}
+
+	if (!parse_expr(token->next, &node->right))
+	{
+		free(left);
+		free(node);
+		return false;
+	}
+	node->left = left;
+	(*ast) = node;
 	return true;
 }
 
